@@ -8,7 +8,7 @@ import ReactMarkdown from '@/components/ui/markdown';
 export default function FloatingAI() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role:'assistant', content:'Hi! I\'m your YouthAI OS assistant. Ask me anything about grants, projects or opportunities for your workspace.' }
+    { role:'assistant', content:'Salut! Sunt asistentul YouthAI OS. Întreabă-mă orice despre granturi, proiecte sau oportunități pentru spațiul tău de lucru.' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,9 +28,9 @@ export default function FloatingAI() {
         body: JSON.stringify({ messages: [...messages, userMsg], workspaceId: current?.id })
       });
       const d = await r.json();
-      setMessages(m => [...m, { role:'assistant', content: d.content || d.error || 'No response.' }]);
+      setMessages(m => [...m, { role:'assistant', content: d.content || d.error || 'Fără răspuns.' }]);
     } catch (e) {
-      setMessages(m => [...m, { role:'assistant', content: 'Error connecting to AI. Configure Azure OpenAI in .env.' }]);
+      setMessages(m => [...m, { role:'assistant', content: 'Eroare la conectarea cu AI. Configurează Azure OpenAI în .env.' }]);
     } finally { setLoading(false); }
   };
 
@@ -54,7 +54,7 @@ export default function FloatingAI() {
                 <Sparkles className="w-3.5 h-3.5 text-white" />
               </div>
               <div className="flex-1">
-                <div className="text-sm font-medium">YouthAI Assistant</div>
+                <div className="text-sm font-medium">Asistent YouthAI</div>
                 <div className="text-[10px] text-muted-foreground">{current?.name || 'Global'}</div>
               </div>
             </div>
@@ -66,12 +66,12 @@ export default function FloatingAI() {
                   </div>
                 </div>
               ))}
-              {loading && <div className="flex items-center gap-2 text-xs text-muted-foreground"><Loader2 className="w-3 h-3 animate-spin" /> Thinking…</div>}
+              {loading && <div className="flex items-center gap-2 text-xs text-muted-foreground"><Loader2 className="w-3 h-3 animate-spin" /> Se gândește…</div>}
             </div>
             <div className="p-3 border-t border-border">
               <div className="flex items-center gap-2 rounded-xl bg-secondary px-2 py-1.5">
                 <MessageSquare className="w-4 h-4 text-muted-foreground" />
-                <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==='Enter' && send()} placeholder="Ask anything…" className="flex-1 bg-transparent text-sm outline-none" />
+                <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==='Enter' && send()} placeholder="Întreabă orice…" className="flex-1 bg-transparent text-sm outline-none" />
                 <button onClick={send} disabled={loading} className="p-1.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-50">
                   <Send className="w-3.5 h-3.5" />
                 </button>

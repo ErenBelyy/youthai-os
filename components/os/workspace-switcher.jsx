@@ -30,14 +30,14 @@ export default function WorkspaceSwitcher() {
             <span className="text-white drop-shadow">{current?.emoji || '\u2728'}</span>
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-medium truncate">{current?.name || 'Select workspace'}</div>
-            <div className="text-[10px] text-muted-foreground truncate">{current?.tagline || 'No workspace selected'}</div>
+            <div className="text-sm font-medium truncate">{current?.name || 'Selectează spațiu'}</div>
+            <div className="text-[10px] text-muted-foreground truncate">{current?.tagline || 'Niciun spațiu selectat'}</div>
           </div>
           <ChevronsUpDown className="w-3.5 h-3.5 text-muted-foreground" />
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-[260px] p-1.5" align="start">
-        <div className="text-[10px] uppercase tracking-wider text-muted-foreground px-2 py-1.5">Workspaces</div>
+        <div className="text-[10px] uppercase tracking-wider text-muted-foreground px-2 py-1.5">Spații de lucru</div>
         <div className="space-y-0.5 max-h-[260px] overflow-y-auto scrollbar-thin">
           {workspaces.map(w => (
             <button key={w.id} onClick={()=>{ switchWorkspace(w.id); setOpen(false); router.push(`/workspace/${w.id}`); }} className="w-full flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-accent transition text-left">
@@ -55,15 +55,15 @@ export default function WorkspaceSwitcher() {
         <div className="border-t border-border mt-1 pt-1">
           {creating ? (
             <div className="p-1.5 space-y-1.5">
-              <input value={name} onChange={e=>setName(e.target.value)} onKeyDown={e=>e.key==='Enter' && create()} placeholder="Organization name…" className="w-full bg-secondary px-2 py-1.5 rounded text-sm outline-none focus:ring-2 focus:ring-primary" autoFocus />
+              <input value={name} onChange={e=>setName(e.target.value)} onKeyDown={e=>e.key==='Enter' && create()} placeholder="Numele organizației…" className="w-full bg-secondary px-2 py-1.5 rounded text-sm outline-none focus:ring-2 focus:ring-primary" autoFocus />
               <div className="flex gap-1.5">
-                <button onClick={create} className="flex-1 text-xs bg-primary text-primary-foreground rounded px-2 py-1.5">Create</button>
-                <button onClick={()=>setCreating(false)} className="text-xs rounded px-2 py-1.5 hover:bg-accent">Cancel</button>
+                <button onClick={create} className="flex-1 text-xs bg-primary text-primary-foreground rounded px-2 py-1.5">Creează</button>
+                <button onClick={()=>setCreating(false)} className="text-xs rounded px-2 py-1.5 hover:bg-accent">Anulează</button>
               </div>
             </div>
           ) : (
             <button onClick={()=>setCreating(true)} className="w-full flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-accent text-sm text-muted-foreground">
-              <Plus className="w-3.5 h-3.5" /> New workspace
+              <Plus className="w-3.5 h-3.5" /> Spațiu nou
             </button>
           )}
         </div>

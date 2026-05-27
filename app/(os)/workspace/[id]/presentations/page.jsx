@@ -15,27 +15,27 @@ export default function PresentationsPage({ params }) {
     setLoading(true); setSlides('');
     try {
       const r = await fetch('/api/ai/chat', { method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ messages: [{ role:'user', content: `Generate a 10-slide pitch deck about: ${topic}` }], workspaceId: wsId, agentKey:'presentation' }) });
+        body: JSON.stringify({ messages: [{ role:'user', content: `Generează un deck de 10 slide-uri despre: ${topic}` }], workspaceId: wsId, agentKey:'presentation' }) });
       const d = await r.json();
-      setSlides(d.content || `⚠️ ${d.error || 'No response'}`);
+      setSlides(d.content || `⚠️ ${d.error || 'Fără răspuns'}`);
     } finally { setLoading(false); }
   };
 
   return (
     <div>
-      <PageHeader icon={Presentation} title="Presentations" subtitle="Generate editable slide decks for donors, events and trainings." gradient="from-aurora-violet to-aurora-rose" />
+      <PageHeader icon={Presentation} title="Prezentări" subtitle="Generează prezentări editabile pentru donatori, evenimente și traininguri." gradient="from-aurora-violet to-aurora-rose" />
       <div className="p-6 md:p-8 max-w-4xl mx-auto space-y-4">
         <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-xl p-4">
-          <textarea value={topic} onChange={e=>setTopic(e.target.value)} rows={3} placeholder="Topic, audience, tone, key messages…" className="w-full bg-secondary rounded-xl p-3 text-sm outline-none resize-none" />
+          <textarea value={topic} onChange={e=>setTopic(e.target.value)} rows={3} placeholder="Subiect, audiență, ton, mesaje cheie…" className="w-full bg-secondary rounded-xl p-3 text-sm outline-none resize-none" />
           <div className="flex justify-end mt-2">
             <button onClick={generate} disabled={loading || !topic.trim()} className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-sm disabled:opacity-50">
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />} Generate slides
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />} Generează slide-uri
             </button>
           </div>
         </div>
         {slides && (
           <div className="rounded-2xl border border-border bg-card/60 backdrop-blur-xl p-5">
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Deck outline</div>
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2">Schiță deck</div>
             <ReactMarkdown>{slides}</ReactMarkdown>
           </div>
         )}
