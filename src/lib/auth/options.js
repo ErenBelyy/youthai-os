@@ -2,7 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import bcrypt from 'bcryptjs';
-import { repo, uuid } from '@/lib/db/client';
+import { repo, uuid } from '/src/lib/db/client';
 
 async function acceptPendingInvites(user) {
   const invitesRepo = repo('invites');

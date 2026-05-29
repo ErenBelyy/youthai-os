@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth/options';
-import { repo, uuid, azureSqlConfigured } from '@/lib/db/client';
-import { ensureSeed } from '@/lib/db/seed';
-import { azureConfigured, chatCompletion } from '@/lib/ai/azure-openai';
-import { searchConfigured, getSearchClient } from '@/lib/ai/azure-search';
-import { buildSystem } from '@/lib/ai/prompts';
+import { authOptions } from '/src/lib/auth/options';
+import { repo, uuid, azureSqlConfigured } from '/src/lib/db/client';
+import { ensureSeed } from '/src/lib/db/seed';
+import { azureConfigured, chatCompletion } from '/src/lib/ai/azure-openai';
+import { searchConfigured, getSearchClient } from '/src/lib/ai/azure-search';
+import { buildSystem } from '/src/lib/ai/prompts';
 
 function cors(res) {
   res.headers.set('Access-Control-Allow-Origin', process.env.CORS_ORIGINS || '*');
